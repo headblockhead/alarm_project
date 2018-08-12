@@ -1,0 +1,19 @@
+# Happy Coding!
+
+service: alarm-web
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: eu-west-1
+  environment:
+    variable1: value1
+
+functions:
+  detect:
+    handler: handler.detect
+    events:
+      - http:
+          path: sensor/detect
+          method: post

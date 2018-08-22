@@ -1,5 +1,3 @@
-# Happy Coding!
-
 service: alarm-web
 
 provider:
@@ -8,8 +6,14 @@ provider:
   stage: dev
   region: eu-west-1
   environment:
-    FROM_EMAIL_ADDRESS: ${file(../variables.yml):environment.FROM_EMAIL_ADDRESS}
-    TO_EMAIL_ADDRESS: ${file(../variables.yml):environment.TO_EMAIL_ADDRESS}
+    FROM_EMAIL_ADDRESS: ${file(variables.yml):environment.FROM_EMAIL_ADDRESS}
+    TO_EMAIL_ADDRESS: ${file(variables.yml):environment.TO_EMAIL_ADDRESS}
+  iamRoleStatements:
+    -  Effect: "Allow"
+       Action:
+         - "ses:SendEmail"
+         - "ses:SendRawEmail"
+       Resource: "*"
 
 
 functions:

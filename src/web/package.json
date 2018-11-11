@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "aws-sdk": "^2.298.0",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "nunjucks": "^3.1.4"
   }
 }

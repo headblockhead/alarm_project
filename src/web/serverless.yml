@@ -20,6 +20,16 @@ functions:
       - http:
           path: sensor/detect
           method: post
+  display:
+    handler: handler.display
+    events:
+      - http:
+          path: /
+          method: get
+
+package:
+  include:
+    - templates/**
 
 resources:
   Resources:

@@ -31,14 +31,18 @@ RestClient client = RestClient("xxxxx.execute-api.eu-west-1.amazonaws.com", 443,
 const char *eventDoorOpened = "{ \"event\": \"door_opened\" }";
 const char *eventDoorClosed = "{ \"event\": \"door_closed\" }";
 
+const int buzzerPin = D0;
 const int inPin = D1;
+
+const bool shouldUseBuzzer = true;
+const bool shouldSendMessages = true;
 
 void setup()
 {
+  pinMode(buzzerPin, OUTPUT);
   pinMode(inPin, INPUT);
   Serial.begin(115200);
 
-  // Using 
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -62,10 +66,22 @@ void loop()
   if (newState != previousState) {
     if (newState == HIGH) {
       Serial.println("Door was closed");
-      postSecure(eventDoorClosed);
+      if (shouldUseBuzzer) {
+        Serial.print("Buzzing closed...");
+        buzzClosed();
+      }
+      if (shouldSendMessages) {
+        postSecure(eventDoorClosed);
+      }
     } else {
       Serial.println("Door was opened");
-      postSecure(eventDoorOpened);
+      if (shouldUseBuzzer) {
+        Serial.print("Buzzing open...");
+        buzzOpened();
+      }
+      if (shouldSendMessages) {
+        postSecure(eventDoorOpened);
+      }
     }
   }
   previousState = newState;
@@ -79,5 +95,24 @@ void postSecure(const char *event)
   Serial.println("Results (status / response)...");
   Serial.println(statusCode);
   Serial.println(response);
+}
+
+void buzz(int pin, int frequency, int duration) {
+  analogWriteFreq(frequency);
+  analogWrite(pin, 1000);
+  delay(duration);
+  analogWrite(pin, 0);
+}
+
+void buzzOpened() {
+  buzz(buzzerPin, 250, 450);
+  buzz(buzzerPin, 500, 350);
+  buzz(buzzerPin, 750, 350);
+}
+
+void buzzClosed() {
+  buzz(buzzerPin, 750, 450);
+  buzz(buzzerPin, 500, 350);
+  buzz(buzzerPin, 250, 350); 
 }
 

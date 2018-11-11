@@ -5,16 +5,13 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: eu-west-1
-  environment:
-    FROM_EMAIL_ADDRESS: ${file(variables.yml):environment.FROM_EMAIL_ADDRESS}
-    TO_EMAIL_ADDRESS: ${file(variables.yml):environment.TO_EMAIL_ADDRESS}
   iamRoleStatements:
     -  Effect: "Allow"
        Action:
-         - "ses:SendEmail"
-         - "ses:SendRawEmail"
-       Resource: "*"
-
+         - "dynamodb:PutItem"
+         - "dynamodb:GetItem"
+         - "dynamodb:Query"
+       Resource: "arn:aws:dynamodb:eu-west-1:*:table/doorTable"
 
 functions:
   detect:
@@ -23,3 +20,23 @@ functions:
       - http:
           path: sensor/detect
           method: post
+
+resources:
+  Resources:
+    doorTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: doorTable
+        AttributeDefinitions:
+          - AttributeName: day
+            AttributeType: S
+          - AttributeName: time
+            AttributeType: S
+        KeySchema:
+          - AttributeName: day
+            KeyType: HASH
+          - AttributeName: time
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 2
+          WriteCapacityUnits: 2

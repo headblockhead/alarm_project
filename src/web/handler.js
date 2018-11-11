@@ -1,6 +1,7 @@
 'use strict';
 
 var AWS = require('aws-sdk');
+var moment = require("moment");
 
 module.exports.detect = detect;
 
@@ -14,42 +15,27 @@ function detect(event, context, callback) {
 
   var e = JSON.parse(event.body);
 
-  var from = process.env.FROM_EMAIL_ADDRESS;
-  var to = process.env.TO_EMAIL_ADDRESS;
-  console.log({ "msg": "sending email", from, to });
+  console.log({ "msg": "writing to dynamodb" });
 
-  sendEmail(from, to, "Door", e.event)
-    .then(function (data) {
-      console.log({ emailsSent: 1 });
+  var dynamodb = new AWS.DynamoDB();
+  dynamodb.putItem(
+    {
+      "TableName": "doorTable",
+      "Item": {
+        "day": { "S": moment().format('YYYY-MM-DD') },
+        "time": { "S": moment().format() },
+        "week": { "S": moment().format('YYYY w') },
+        "year": { "S": moment().format('YYYY') },
+        "event": { "S": e.event },
+      }
+    }).promise()
+    .then(function (result) {
+      console.log({ recordsWritten: 1 });
     })
     .catch(function (err) {
-      console.log({ msg: "sending email failed", err });
+      console.log({ err, msg: "error writing database records" });
+    })
+    .then(function () {
+      callback(null, response)
     });
-
-  callback(null, response);
-}
-
-function sendEmail(from, to, subject, body) {
-  AWS.config.update({ region: 'eu-west-1' });
-  var params = {
-    Destination: {
-      ToAddresses: [to]
-    },
-    Message: {
-      Body: {
-        Text: {
-          Charset: "UTF-8",
-          Data: body
-        }
-      },
-      Subject: {
-        Charset: 'UTF-8',
-        Data: subject
-      }
-    },
-    Source: from,
-  };
-
-  var ses = new AWS.SES({ apiVersion: '2010-12-01' });
-  return ses.sendEmail(params).promise();
 }

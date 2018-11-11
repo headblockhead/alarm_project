@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "aws-sdk": "^2.298.0"
+    "aws-sdk": "^2.298.0",
+    "moment": "^2.22.2"
   }
 }

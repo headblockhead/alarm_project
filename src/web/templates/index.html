@@ -29,11 +29,14 @@
     };
    })
   var x = new Chart(document.getElementById("myChart"), {
-    type: 'scatter',
+    type: 'line',
     data: {
         datasets: [{
           label: "Door",
           data: xy,
+          steppedLine: true,
+          fill: false,
+          borderColor: window.chartColors.green,
         }]
     },
     options: {
@@ -44,7 +47,29 @@
       },
     },
   });
+
+  function redirect(days) {
+    var d = new Date();
+    d.setDate(d.getDate()+days);
+    var month = d.getUTCMonth();
+    var day = d.getUTCDate();
+    var year = d.getUTCFullYear();
+    window.location.href = "?day=" + year.toString() + "-" + (month+1).toString() + "-" + day.toString();
+  }
 </script>
+
+<h2>Days</h2>
+
+<ul>
+  <li><a href="#" onclick="redirect(0);">today</a></li>
+  <li><a href="#" onclick="redirect(-1);">-1 days from today</a></li>
+  <li><a href="#" onclick="redirect(-2);">-2 days from today</a></li>
+  <li><a href="#" onclick="redirect(-3);">-3 days from today</a></li>
+  <li><a href="#" onclick="redirect(-4);">-4 days from today</a></li>
+  <li><a href="#" onclick="redirect(-5);">-5 days from today</a></li>
+  <li><a href="#" onclick="redirect(-6);">-6 days from today</a></li>
+  <li><a href="#" onclick="redirect(-7);">-7 days from today</a></li>
+</ul>
 
 </body>
 </html>

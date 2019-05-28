@@ -1,3 +1,10 @@
+<style>
+  html {
+    color: rgba(0, 0, 0, 0.836);
+    background-color: rgb(4, 117, 121);
+  }
+  </style>
+
 <html>
         <style type="text/css">
             body {
@@ -10,41 +17,120 @@
 <header>
         <center><h1><b><u>Door status</u></b></h1></center>
         <div>
-             <h3>  <center>The door is currently
-                <b> [open/closed]</b></center>  </h3>  
+             <h2>  <center>The door is currently
+                <b> [open/closed]</b></center>  </h2>  
+                <center><h3>Past Usage of the door:</h3></center>
         </div>
 </header>
 <body>
-    <!--Css Styling for the table-->
+    <center><h4>[Day/week/month/year] View</h4></center>
+    <div>    <!--Css Styling for the table-->
+      <style>
+      td, th {
+              border: 1px solid #000000;
+              text-align: center;
+              padding: 11px;
+            }
+            tr:nth-child(odd) {
+    background-color: #00b7ff;
+  }
+  tr:nth-child(even) {
+    background-color: #027eaf;}</style>
+    </style>
+    <!--label-->
+    <!--The table-->
+      <table>
+          <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
+          <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
+          <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
+          <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
+          <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
+      </table>
+      <!--Radio buttons for changing the view in the table-->
     <style>
-    td, th {
-            border: 1px solid #000000;
-            text-align: center;
-            padding: 11px;
-          }
-          tr:nth-child(odd) {
-  background-color: #00b7ff;
-}
-tr:nth-child(even) {
-  background-color: #027eaf;}</style>
+      /* Customize the label (the container) */
+  .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(131, 131, 131);
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
   </style>
-  <!--label-->
-  <center><h5>Past Usage of the door</h5></center>
-  <!--The table-->
-    <table>
-        <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
-        <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
-        <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
-        <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
-        <tr><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td><td>[open/closed]-[date]-[time]</td></tr>
-    </table>
-    <!--Radio buttons for changing the view in the table-->
-    <center>    <input type="radio" name="d/w/m/y value="Day"> Day
-        <input type="radio" name="d/w/m/y value="Week"> Week
-        <input type="radio" name="d/w/m/y value="Month"> Month
-        <input type="radio" name="d/w/m/y value="Year"> Year
-    </center>
-
-
+  <label class="container">Day
+    <input type="radio" checked="checked" name="radio">
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">Week
+    <input type="radio" name="radio">
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">Month
+    <input type="radio" name="radio">
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">Year
+    <input type="radio" name="radio">
+    <span class="checkmark"></span>
+  </label>
+  </div>
 </body>
+
 </html>
